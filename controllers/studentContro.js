@@ -12,6 +12,16 @@ const createStudent = async (req, res) => {
     res.status(500).json({ message: 'Error creating student', error });
   }
 };
+// Get all students
+const getAllStudents = async (req, res) => {
+  try {
+    const students = await Student.find();
+    res.status(200).json(students);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching students', error });
+  }
+};
+
 
 // Assign a Mentor to a Student
 const assignMentorToStudent = async (req, res) => {
@@ -86,4 +96,6 @@ module.exports = {
   changeMentorForStudent,
   getStudentsForMentor,
   getPreviousMentorForStudent,
+  getAllStudents ,
+ 
 };

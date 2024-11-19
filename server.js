@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const http = require('http');
 const app = express();
 const server = http.createServer(app);
@@ -11,6 +12,14 @@ const studentRoute = require('./routes/studentRoute');
 dotenv.config();
 
 connectDB();
+
+const corsOptions = {
+  origin: 'http://localhost:5173',  // Allow only frontend from this URL
+  methods: 'GET,POST,PUT,DELETE',  // Restrict allowed HTTP methods
+  allowedHeaders: 'Content-Type',  // Allow specific headers
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use('/api/mentors', mentorRoute);
